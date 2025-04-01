@@ -6,7 +6,6 @@ public class TacoStand
 	/* STATIC VARIABLES */
 	private static int numAsada = 0, numPollo = 0, numLengua = 0, numUltimate = 0;
 	private static double totalFunds = 0;
-	private static double budget = 0;
 	private static int tacosEach = 0;
 	public static boolean tacosStocked = true;
 
@@ -100,8 +99,7 @@ public class TacoStand
 	public static void updateTotalFunds(int tacoOption, int numTacos)
 	{
 
-		if(tacosEach>=numTacos) {
-			switch(tacoOption){
+		switch(tacoOption){
 			case 1:
 				totalFunds += numTacos * 2.5;
 				numAsada -= numTacos;
@@ -118,13 +116,9 @@ public class TacoStand
 				totalFunds += numTacos * 18;
 				numUltimate -= numTacos;
 				break;
-			}
 		}
-		else {
-			tacosStocked = false;
-			System.out.println("We don't have that many tacos, sorry! Try again :(");
-		}
-		//TODO: this is stubbed, replace this line with your actual code!
+		
+		
 	}
 	
 	
@@ -146,7 +140,6 @@ public class TacoStand
 				else {
 					return true;
 				}
-				break;
 			case 2:
 				if(numPollo<numTacos) {
 					return false;
@@ -154,7 +147,6 @@ public class TacoStand
 				else {
 					return true;
 				}
-				break;
 			case 3:
 				if(numLengua<numTacos){
 					return false;
@@ -162,7 +154,6 @@ public class TacoStand
 				else {
 					return true;
 				}
-				break;
 			case 4:
 				if(numUltimate<numTacos){
 					return false;
@@ -170,7 +161,6 @@ public class TacoStand
 				else {
 					return true;
 				}
-				break;
 			default:
 			return false;
 			}
