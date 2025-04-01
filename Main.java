@@ -15,6 +15,7 @@ public class Main
 	 * - Take customer order
 	 * - Print status of stand (when its closed)
 	 */
+	
 	public static void main(String[] args)
 	{
 		//DECLARATION + INITIALIZATION SECTION
@@ -76,9 +77,11 @@ public class Main
 	 * 
 	 * @param numTacos
 	 */
-	public static void printConfirmation(int numTacos) //TODO: upgrade per documentation
+	public static void printConfirmation(int numTacos) 
 	{
-		System.out.println("Here you go, buen provecho!");
+		System.out.println("You ordered " + numTacos + " tacos.");
 		System.out.println("🌮");
+		
+		
 	}
 }

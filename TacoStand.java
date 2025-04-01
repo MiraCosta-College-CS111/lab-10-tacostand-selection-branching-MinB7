@@ -6,6 +6,9 @@ public class TacoStand
 	/* STATIC VARIABLES */
 	private static int numAsada = 0, numPollo = 0, numLengua = 0, numUltimate = 0;
 	private static double totalFunds = 0;
+	private static double budget = 0;
+	private static int tacosEach = 0;
+	public static boolean tacosStocked = true;
 
 	/**
 	 * Sets the store to zero for use in automated testing.
@@ -36,6 +39,7 @@ public class TacoStand
 	*/
 	public static String getStatus()
 	{
+	
 		return String.format("%s%nMCC Taco Stand Status%n%s%n" +
 			"%-23s$%-7.2f%n%s%n" +
 			"%-23s%2d tacos%n" +
@@ -45,7 +49,7 @@ public class TacoStand
 			TacoStand.BAR, TacoStand.BAR, 
       "Funds Available:", TacoStand.totalFunds, TacoStand.BAR,
       "# of Asada Left:", TacoStand.numAsada,
-			"# of Pollo Left:", TacoStand.numPollo,
+		"# of Pollo Left:", TacoStand.numPollo,
       "# of Lengua Left:", TacoStand.numLengua,
       "# of Ultimate Left:",TacoStand.numUltimate, TacoStand.BAR);
 	}
@@ -72,16 +76,18 @@ public class TacoStand
 	public static boolean orderSupplies(double budget)
 	{
 		//tacos cost 75 cents each in supplies, keeping it simple
-	    int tacosEach = (int)(Math.round(budget / 0.75 / 4));
-
+		tacosEach += (int)(Math.round(budget / 0.75 / 4));
 	    TacoStand.totalFunds -= budget;
-
+		
 	    TacoStand.numAsada += tacosEach;
 	    TacoStand.numPollo += tacosEach;
 	    TacoStand.numLengua += tacosEach;
 	    TacoStand.numUltimate += tacosEach;
 
-		return true;  //TODO: this is stubbed, replace this line with your actual code!
+		if(budget>=totalFunds)
+		return true;
+		else
+		return false;
 	}
 
 	/**
@@ -93,6 +99,31 @@ public class TacoStand
 	 */
 	public static void updateTotalFunds(int tacoOption, int numTacos)
 	{
+
+		if(tacosEach>=numTacos) {
+			switch(tacoOption){
+			case 1:
+				totalFunds += numTacos * 2.5;
+				numAsada -= numTacos;
+				break;
+			case 2:
+				totalFunds += numTacos * 1.75;
+				numPollo -= numTacos;
+				break;
+			case 3:
+				totalFunds += numTacos * 3.0;
+				numLengua -= numTacos;
+				break;
+			case 4:
+				totalFunds += numTacos * 18;
+				numUltimate -= numTacos;
+				break;
+			}
+		}
+		else {
+			tacosStocked = false;
+			System.out.println("We don't have that many tacos, sorry! Try again :(");
+		}
 		//TODO: this is stubbed, replace this line with your actual code!
 	}
 	
@@ -107,6 +138,43 @@ public class TacoStand
 	 */
 	public static boolean areTacosAvailable(int tacoOption, int numTacos)
 	{
-		return false; //TODO: this is stubbed, replace this line with your actual code!
+			switch(tacoOption){
+			case 1:
+				if(numAsada<numTacos) {
+					return false;
+				}
+				else {
+					return true;
+				}
+				break;
+			case 2:
+				if(numPollo<numTacos) {
+					return false;
+				}
+				else {
+					return true;
+				}
+				break;
+			case 3:
+				if(numLengua<numTacos){
+					return false;
+				}
+				else {
+					return true;
+				}
+				break;
+			case 4:
+				if(numUltimate<numTacos){
+					return false;
+				}
+				else {
+					return true;
+				}
+				break;
+			default:
+			return false;
+			}
 	}
+	
+
 }
